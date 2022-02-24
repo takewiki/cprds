@@ -3,7 +3,7 @@ menu_majority <- tabItem(tabName = "majority",
                            column(width = 12,
                                   tabBox(title ="majority工作台",width = 12,
                                          id='tabSet_majority',height = '300px',
-                                         tabPanel('sheet1',tagList(
+                                         tabPanel('回料批次分析',tagList(
                                            fluidRow(column(4,box(
                                              title = "操作区域", width = NULL, solidHeader = TRUE, status = "primary",
                                              'sheet1'
@@ -16,7 +16,7 @@ menu_majority <- tabItem(tabName = "majority",
                                            ))
                                            
                                          )),
-                                         tabPanel('sheet2',tagList(
+                                         tabPanel('回料还原入库(中台->ERP)',tagList(
                                            fluidRow(column(4,box(
                                              title = "操作区域", width = NULL, solidHeader = TRUE, status = "primary",
                                              'sheet2'
@@ -29,7 +29,7 @@ menu_majority <- tabItem(tabName = "majority",
                                            
                                          )),
                                          
-                                         tabPanel('sheet3',tagList(
+                                         tabPanel('成本BOM',tagList(
                                            fluidRow(column(4,box(
                                              title = "操作区域", width = NULL, solidHeader = TRUE, status = "primary",
                                              'sheet3'
@@ -41,7 +41,7 @@ menu_majority <- tabItem(tabName = "majority",
                                            ))
                                            
                                          )),
-                                         tabPanel('sheet4',tagList(
+                                         tabPanel('成本结构分析',tagList(
                                            fluidRow(column(4,box(
                                              title = "操作区域", width = NULL, solidHeader = TRUE, status = "primary",
                                              'sheet4'
