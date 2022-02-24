@@ -1,9 +1,9 @@
 # 设置app标题-----
 
-app_title <-'App Template';
+app_title <-'赛普生物数据中台V1.0';
 
 # store data into rdbe in the rds database
-app_id <- 'appTpl'
+app_id <- 'cprds'
 
 #设置数据库链接---
 
