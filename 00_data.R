@@ -17,4 +17,4 @@ conn <- conn_rds('nsic')
 
 
 
-
+config_file = 'config/conn_erp.R'

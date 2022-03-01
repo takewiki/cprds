@@ -32,11 +32,15 @@ menu_series<- tabItem(tabName = "series",
                                       tabPanel('管理成本测算',tagList(
                                         fluidRow(column(4,box(
                                           title = "操作区域", width = NULL, solidHeader = TRUE, status = "primary",
-                                          'sheet3'
+                                          tags$a(href='物料管理成本维护模板.xlsx','第一次使用,请下载物料管理成本维护模板'),
+                                          mdl_file(id = 'cp_item_mngrCost_file',label = '请选择物料的管理成本文件'),
+                                          actionBttn(inputId = 'cp_item_mngrcost_preview',label = '预览管理成本'),
+                                          actionBttn(inputId = 'cp_item_mngrcost_update',label = '更新物料信息')
                                         )),
                                         column(8, box(
                                           title = "报表区域", width = NULL, solidHeader = TRUE, status = "primary",
-                                          'rpt3'
+                                          div(style = 'overflow-x: scroll', mdl_dataTable('cp_item_mngrcost_dataView','预览管理成本'))
+                                          
                                         )
                                         ))
                                         

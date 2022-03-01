@@ -185,8 +185,31 @@
        
        
     })
-   
-   
+    var_cp_item_mngrCost_file <- var_file('cp_item_mngrCost_file')
+    #物料管理成本预览--------
+   observeEvent(input$cp_item_mngrcost_preview,{
+     file_name = var_cp_item_mngrCost_file()
+     if(is.null(file_name)){
+       pop_notice('请选择一个文件')
+     }else{
+       data = cprdspkg::item_mngrCost_read(file_name = file_name)
+       run_dataTable2('cp_item_mngrcost_dataView',data)
+     }
+     
+     
+   })
+    #物料管理成本更新物料-------
+    observeEvent(input$cp_item_mngrcost_update,{
+      file_name = var_cp_item_mngrCost_file()
+      if(is.null(file_name)){
+        pop_notice('请选择一个文件')
+      }else{
+        cprdspkg::item_mngrCost_update(config_file = config_file ,file_name = file_name)
+        pop_notice('更新成功！')
+      }
+      
+      
+    })
    
    
   
