@@ -210,7 +210,107 @@
       
       
     })
-   
+    #查看规则
+    var_cp_pfm_rule_chooser <- var_text('cp_pfm_rule_chooser')
+    observeEvent(input$cp_pfm_rule_query,{
+      FRuleName = var_cp_pfm_rule_chooser()
+      # print(FRuleName)
+      data = cprdspkg::outstock_performance_rule_query(config_file = config_file,FName = FRuleName)
+      run_dataTable2(id = 'cp_pfm_rule_dataView',data = data)
+      
+    })
+    
+    
+    #新增提成规则
+    var_cp_pfm_rule_new_FRuleName = var_text('cp_pfm_rule_new_FRuleName')
+    var_cp_pfm_rule_new_FParam_x = var_text('cp_pfm_rule_new_FParam_x')
+    var_cp_pfm_rule_new_FParam_y = var_text('cp_pfm_rule_new_FParam_y')
+    var_cp_pfm_rule_new_FParam_z = var_text('cp_pfm_rule_new_FParam_z')
+    var_cp_pfm_rule_new_FStartDate = var_date('cp_pfm_rule_new_FStartDate')
+    var_cp_pfm_rule_new_FEndDate = var_date('cp_pfm_rule_new_FEndDate')
+    observeEvent(input$cp_pfm_rule_new,{
+      FName = var_cp_pfm_rule_new_FRuleName()
+      FParam_x = var_cp_pfm_rule_new_FParam_x()
+      FParam_y = var_cp_pfm_rule_new_FParam_y()
+      FParam_z = var_cp_pfm_rule_new_FParam_z()
+      FStartDate = var_cp_pfm_rule_new_FStartDate()
+      FEndDate = var_cp_pfm_rule_new_FEndDate()
+      flag = 1
+      if (FName == ''){
+        pop_notice('请输入规则名称')
+        
+        flag =0
+      }
+      if (FParam_x == ''){
+        pop_notice('提成系数x')
+        
+        flag =0
+      }
+      if (FParam_y == ''){
+        pop_notice('止损系数y')
+        
+        flag =0
+      }
+      if (FParam_z == ''){
+        pop_notice('类别系数z')
+        
+        flag =0
+      }
+      
+      if(flag == 1){
+        cprdspkg::outstock_performance_rule_new(config_file = config_file,
+                                                FName = FName,
+                                                FParam_x = as.numeric(FParam_x),
+                                                FParam_y = as.numeric(FParam_y),
+                                                FParam_z = as.numeric(FParam_z) ,
+                                                FStartDate = as.character(FStartDate) ,
+                                                FEndDate = as.character(FEndDate))
+        pop_notice('新增规则成功')
+        
+      }
+      
+      
+      
+    })
+    #计算提成
+    var_cp_pfm_rule_options = var_ListChoose1('cp_pfm_rule_options')
+    var_cp_pfm_rule_dateRange =var_dateRange('cp_pfm_rule_dateRange')
+    observeEvent(input$cp_pfm_rule_calc,{
+      FRuleName = var_cp_pfm_rule_options()
+      #print(FRuleName)
+      dates = var_cp_pfm_rule_dateRange()
+      #print(dates)
+      FStartDate = as.character(dates[1])
+      FEndDate = as.character(dates[2])
+      try({
+        cprdspkg::outstock_performance_calc(config_file = config_file,FRuleName =FRuleName ,FStartDate = FStartDate,FEndDate = FEndDate)
+      })
+      
+      pop_notice('提成计算成功')
+      
+ 
+      
+    })
+    #提成查询及下载-----
+    var_cp_pfm_res_options_query = var_ListChoose1('cp_pfm_res_options_query')
+    var_cp_pfm_res_dateRange_query =var_dateRange('cp_pfm_res_dateRange_query')
+    observeEvent(input$cp_pfm_res_query,{
+      
+      FRuleName = var_cp_pfm_res_options_query()
+      dates = var_cp_pfm_res_dateRange_query()
+      FStartDate = as.character(dates[1])
+      FEndDate = as.character(dates[2])
+      file_name = paste0("提成明细下载_",FRuleName,"_",FStartDate,"_",FEndDate,".xlsx")
+      data = cprdspkg::outstock_performance_query(config_file = config_file,FRuleName =FRuleName ,FStartDate = FStartDate,FEndDate = FEndDate)
+      run_dataTable2('cp_pfm_res_dataView',data = data)
+      run_download_xlsx(id = 'cp_pfm_res_download',data = data,filename = file_name)
+      
+      
+      
+      
+    })
+    
+    
    
   
 })

@@ -1,7 +1,7 @@
 # 设置app标题-----
 # 1.3
 
-app_title <-'赛普生物数据中台V1.0';
+app_title <-'赛普生物数据中台V2.0';
 
 # store data into rdbe in the rds database
 app_id <- 'cprds'
