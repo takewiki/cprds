@@ -309,6 +309,39 @@
       
       
     })
+    #对账单预览----
+    var_cp_dzd_initData_file <- var_file('cp_dzd_initData_file')
+    observeEvent(input$dzd_initData_query,{
+      file_name = var_cp_dzd_initData_file()
+      if(is.null(file_name)){
+        pop_notice('请选择一个文件')
+      }else{
+        data = cprdspkg::dzd_initData_read(file_name = file_name,lang = 'cn')
+        run_dataTable2(id = 'dzd_initData_dataView',data = data)
+      }
+     
+    })
+    observeEvent(input$dzd_initData_update,{
+      file_name = var_cp_dzd_initData_file()
+      if(is.null(file_name)){
+        pop_notice('请选择一个文件')
+      }else{
+        data = cprdspkg::dzd_initData_read(file_name = file_name,lang = 'en')
+        ncount = nrow(data)
+        if(ncount >0){
+          try({
+            cprdspkg::dzd_initData_updateAll(config_file = config_file,data = data)
+            pop_notice('更新成功')
+          })
+        }else{
+          pop_notice('更新失败')
+          
+        }
+        
+      }
+      
+      
+    })
     
     
    
