@@ -4,7 +4,7 @@ menu_majority <-tabItem(tabName = "majority",
                             title = "BOM查询工作台",width = 12,
                             # The id lets us use input$tabset1 on the server to find the current tab
                             id = "tabset_bomQuery", height = "600px",
-                            tabPanel("上传数据", 
+                            tabPanel("母BOM", 
                                      tagList(
                                        fluidRow(
                                          column(4,     box(
@@ -85,7 +85,7 @@ menu_majority <-tabItem(tabName = "majority",
                                            'data here'
                                          )))
                                      )),
-                            tabPanel("配件BOM速查", 
+                            tabPanel("生产BOM", 
                                      tagList(
                                        fluidRow(
                                          column(4,     box(
